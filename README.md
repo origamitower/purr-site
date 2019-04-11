@@ -1,2 +1,5 @@
-# purr-site
-Research blog
+# Purr Website
+
+The research website for Purr.
+
+

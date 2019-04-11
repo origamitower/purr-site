@@ -1,0 +1,15 @@
+title: "Purr"
+highlighter: rouge
+markdown: kramdown
+
+plugins:
+  - jekyll-redirect-from
+
+navigation:
+  - text: Source Code
+    url: https://github.com/origamitower/purr
+    group: external
+
+  - text: Twitter
+    url: https://twitter.com/OrigamiTower
+    group: external
