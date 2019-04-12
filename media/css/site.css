@@ -1273,3 +1273,12 @@
   font-family: "PT Sans Caption", sans-serif;
   color: #DB5A6B;
 }
+
+.rl-content .border-on-image {
+  border: none;
+}
+
+.rl-content .border-on-image img {
+  border: 1px solid #ececea;
+  padding: 10px;
+}
