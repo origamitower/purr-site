@@ -31,3 +31,5 @@ A secondary goal for Purr is to support the idea of computers as personal assist
 *An inscrutable type error message in Haskell*
 {: .centred-image .border-on-image }
 
+
+## 
