@@ -3,7 +3,7 @@ title: What is Purr?
 layout: article
 group: blog
 snip: >
-  A very short introduction to Purr. Learn about its goals, and how it plans to achieve them.
+  A short introduction to Purr. Learn about its goals, and how it plans to achieve them.
 ---
 
 For the past 5 years i've been thinking about, and experimenting with, ways in which programming could be better. Although I did not have a clear direction for most of that time, I believe I have a good idea of what "better" means to me now, and that's what this research blog will be about.
@@ -64,5 +64,36 @@ So we need a system that allows extensibility *despite* people not designing for
 
 ### The problem of combining components
 
-Let's say you're lucky in this case that the library designers defined extension points that work for your use case. You extend their rich text editor component and continue on with your life. Now you're at a point where your beta users are finding a lot of errors that should've been fixed in each new version. That's making your software seem unreliable, and your users are getting more frustrated by the day. You decide to finally invest a bit in automated tests.
+Let's say you're lucky in this case that the library designers defined extension points that work for your use case. You extend their rich text editor component and continue on with your life. Now you're at a point where your beta users are finding a lot of errors that should've been fixed in each new version. That's making your software seem unreliable, and your users are getting more frustrated by the day.
 
+You decide that it's time to finally invest a bit in automated tests.
+
+The testing libraries you can find are simple enough. They'll often have a `equals` operation that compares if some value looks like what you expected it to be. There's only one problem. The definition of "equality" is baked within that operation, and it doesn't mean what you want it to mean—for simple values, like numbers, it tests if they're the same numeric value, so `equals(1, 1)` succeeds regardless of where the 1s are coming from. But for more complex values, like a list of text slices, `equals(a, b)` succeeds if both `a` and `b` *point to the same position in memory*.
+
+Testing memory positions doesn't help you. You want to know if, after some operations, the list of text slices looks like what you expect. The "what you expect" part will never be in the same memory position as the actual text slices, because they're coming from different sources—one is you, the other is "whatever is the current state of the rich text editor".
+
+After enough questioning of why a testing library would do this, you set out to write your own. You'd have to, anyway, so might just as well fix what you dislike about this one and release it to the world, so they can benefit of a clearly better project.
+
+So, the first thing is to question yourself: how do I make the testing library support any user-defined type? Some of the answers may be:
+
+  1. "Define an interface that must be implemented." — For example, the objects must provide a `.equals(that)` method which your library then may use.
+
+  2. "Define a type class/protocol that must be implemented." — This is like (1), but the method may be implemented outside of the object's source code, by a different author.
+
+  3. "Use a form of open multiple dispatch." — For example, users would write functions like `define equals(left: RichText, right: RichText) { ... }` and `define equals(left: Number, right: Number) { ... }`, and the library would pick the definition that matches the provided requirements in the signature.
+
+  4. "Define a parametric module that accepts a concept of equality." — For example, a module `class Test(equality: Equality) { ... }` would be instantiated with an object that defines the idea of equality for all objects the program cares about.
+
+(1) is the general approach in object-oriented programs, like Java, JavaScript, Python, Ruby, etc. There's an interface that objects must implement in order to be used in some particular context. But there are two problems with this. The first one is that objects *must* be aware of all contexts in which they may be used, a priori. This is difficult when there's no coordination between the authors of each component. The [Wrapper pattern](https://en.wikipedia.org/wiki/Adapter_pattern) (and things like [Object Algebras](http://www.cs.utexas.edu/~wcook/Drafts/2012/ecoop2012.pdf)) may be used to mitigate this, but it requires applying the wrapper to every object you will use in the context, which is not practical (or efficient). The second one is that an implementation is restricted to a single context—barring the use of wrappers.
+
+(2) is the general approach in modern functional languages, like Scala, Haskell, Clojure, Elixir, etc. Like in (1), there's an interface that must be implemented for the object so it can be used in some particular context. The difference is that this implementation can be done *outside* of the object's source code, by a different author. This removes the problem of objects needing to know all contexts they may be used in a priori—users can just provide the implementation for the object in their own program code. However, this approach still suffers from the second problem—your implementation is restricted to a single context. It also introduces a new problem: if two independent authors provide an implementation of the interface for the same object, they'll conflict, and there'll be usually no tool for resolving this conflict. In other words, the components become fundamentally incompatible.
+
+(3) is much like (2), but resolves a problem with the previous approaches. In both (1) and (2), something like `equals(a, b)` only takes into consideration `a` to select an operation to execute. So if you want to support `equals("1", 1)` and `equals("1", "1")` you need to add that logic in a single function, using common branching operators (like `if/else`). In cases where you may want other authors to be able to add new operations for different combinations of types, that requirement doesn't work. Multiple dispatch just extends the selection to work on any number of parameters. So one could define a `equals(String, Number)` function and an `equals(String, String)` function, and the right one would be selected based on the actual types at runtime.
+
+This approach still suffers from all the other problems (2) does, however.
+
+(4) is a very different approach. Instead of attaching these capabilities to particular objects, you let users provide their own notions of something to the library. Say you need to work with different types of numbers, and for some of them you want equality to be relaxed (but only for testing), as they're not very precise. In this case you could just instantiate a testing library with a definition of equality for each type of number, like in `new Testing({ equals(a, b) { ... } })`. This way you still have control over certain aspects of the library, and you don't have to commit to a single implementation context.
+
+The obvious drawback is that this approach requires much more work: it's harder to crowd-source implementations, you're expected to write a new function for each case. [There are some ways of reducing the amount of configuration work](https://people.mpi-sws.org/~dreyer/papers/mtc/main-long.pdf), but they're still less practical than previous approaches. A more subtle drawback is that this leads to [global incoherence](http://blog.ezyang.com/2014/07/type-classes-confluence-coherence-global-uniqueness/)—it's not easy to know if two uses of the module in your program will have *the same behaviour*, because they may have been configured differently.
+
+None of the options is perfect. Today you just pick your tradeoff (well, generally your programming languages picks your tradeoff for you) and roll with it. We need a system that allows components to combined and adapted to any context, *regardless* of whether authors intended/predicted those uses or not. Again, we cannot expect authors to coordinate the development of each component.
