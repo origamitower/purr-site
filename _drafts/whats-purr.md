@@ -99,4 +99,21 @@ The obvious drawback is that this approach requires much more work: it's harder 
 None of the options is perfect. Today you just pick your tradeoff (well, generally your programming languages picks your tradeoff for you) and roll with it. We need a system that allows components to combined and adapted to any context, *regardless* of whether authors intended/predicted those uses or not. Again, we cannot expect authors to coordinate the development of each component.
 
 
-### The problem of trust
+### The problem of trusting components
+
+As the development progresses you're constantly dealing with a very important choice: should you implement a particular feature yourself, or should you to the project a library that provides such feature?
+
+These days I believe that most people would choose the latter in a heartbeat. But there are some interesting tradeoffs to consider. On one hand, by using an existing library you can focus your energy elsewhere to provide more value for your users. On the other hand, you have to worry about the library's quality, if it's well tested, if it'll work well with your code, if you can count on the authors to continue maintaining it, whether the authors aren't out to attack your computer, etc.
+
+Most of these questions are social problems. Our programming languages and tools aren't designed to deal with them. For example, there's no way in most languages to tell the system that you don't want some particular library to access your file system. Instead, we expect people to investigate everything about the authors of the libraries they plan to use, and audit every single line of code. And then we blame them for not properly auditing things when things naturally fail.
+
+Because languages lack any feature to address these social problems, you get programming communities claiming that you should always keep the libraries you use to a minimum, that none of them should have any dependencies, and that they should be backed by giant corporations that will guarantee that you can trust in them. On the other side you have programming communities claiming that every dependency should be tiny so you can reasonably audit them.
+
+It goes without saying that both are constant targets of actual software attacks, and neither are a reasonable proposal to mitigate this problem.
+
+We then have the issue of privacy. If you're lucky, your programming language notion of privacy is an access modifier (like "private") that you tack on some variable to reduce the scope in which it can be accessed. This is largely useless. When we think about privacy, we also have to consider how information may leak, and we must consider that in some circumstances we *want* to disclose part of the information to a particular someone—but no one else. Access modifiers help with none of these, but give programmers a misguided notion of privacy.
+
+Finally we have known attacks like [Spectre](https://meltdownattack.com/) and [JIT Spraying](https://en.wikipedia.org/wiki/JIT_spraying), which make any library you add especially dangerous. While some of these attacks will require questionable pieces of code that would certainly make people raise an eyebrow reading it, we'd still need to audit every single piece of code we use. Having to very carefully read millions of lines of code, over and over again, each month is simply not a reasonable expectation. Nobody would ever get anything done.
+
+So we need programming language and tools that are designed *for* these social problems. We should be able to define precise privacy policies, and check for leaks and violations. We should be able to restrict what particular pieces of code may do in order to mitigate potential attacks. Down to how these pieces of code *run* and how much space they can use, because Spectre has taught us that even without access to any powerful object (e.g.: access to the filesystem) a piece of code may still read arbitrary memory from the process.
+
