@@ -97,3 +97,6 @@ This approach still suffers from all the other problems (2) does, however.
 The obvious drawback is that this approach requires much more work: it's harder to crowd-source implementations, you're expected to write a new function for each case. [There are some ways of reducing the amount of configuration work](https://people.mpi-sws.org/~dreyer/papers/mtc/main-long.pdf), but they're still less practical than previous approaches. A more subtle drawback is that this leads to [global incoherence](http://blog.ezyang.com/2014/07/type-classes-confluence-coherence-global-uniqueness/)—it's not easy to know if two uses of the module in your program will have *the same behaviour*, because they may have been configured differently.
 
 None of the options is perfect. Today you just pick your tradeoff (well, generally your programming languages picks your tradeoff for you) and roll with it. We need a system that allows components to combined and adapted to any context, *regardless* of whether authors intended/predicted those uses or not. Again, we cannot expect authors to coordinate the development of each component.
+
+
+### The problem of trust
