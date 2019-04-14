@@ -91,7 +91,7 @@ This list will be revised from time to time.
   Findler and Felleisen work describes a contract system that assigns correct blame in a language that supports higher-order functions. It provides some of the power of dependent types without the complexities of proofs.
 
 
-## Influential Technology
+## Technology
 
 [Glamorous Toolkit](https://gtoolkit.com/)
 : The idea of "moldable development" is similar to Purr's idea of lenses.
@@ -109,7 +109,7 @@ This list will be revised from time to time.
 : A Smalltalk dialect with optional types (and pluggable checkers), capability-secure modules, and focus on live/literate programming.
 
 
-## Influential talks
+## Talks
 
 [Maybe not](https://www.youtube.com/watch?v=YR5WdGrpoug)
 : *(Rich Hickey, 2018)*   
