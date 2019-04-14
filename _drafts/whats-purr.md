@@ -117,3 +117,25 @@ Finally we have known attacks like [Spectre](https://meltdownattack.com/) and [J
 
 So we need programming language and tools that are designed *for* these social problems. We should be able to define precise privacy policies, and check for leaks and violations. We should be able to restrict what particular pieces of code may do in order to mitigate potential attacks. Down to how these pieces of code *run* and how much space they can use, because Spectre has taught us that even without access to any powerful object (e.g.: access to the filesystem) a piece of code may still read arbitrary memory from the process.
 
+
+### The problem of evolving components
+
+We've touched this a few times earlier, but one of the major problems in modern programming is "concurrent evolution". That is, we understand that pretty much any big project we work on will require using components that were written by other people. We may even think of these components as "building blocks", but that invites a comparison with the physical world that isn't very accurate.
+
+For example, people can build complex structures out of LEGO. Lego blocks can be combined, and these combined blocks can be further combined. These complex structures may even be created by groups of people, modularly. Because of this, many people think of software components as LEGO blocks. But, for LEGO, we have very restricted ways in which blocks may be combined, and group efforts must be coordinated.
+
+In software, we have components that may be combined in multitude of ways, most not predicted or endorsed by the original authors. The components are often written by different people, at different places and time. There's little coordination in these efforts. And coordination would be difficult, since the same component may be consumed in different ways by different users.
+
+But we can still work around those problems in one way or another. The major difference is that software components are always changing, even if we don't do anything. Imagine that you're building a huge structure out of LEGO blocks, and you've spent the past 4 months working on it. Everything is going smoothly, but all of a sudden blocks in the middle of your structure start shape-shifting! Not only that, they also start devouring neighbouring blocks. Your entire structure crumbles, and you cry yourself to sleep.
+
+This is what software engineering feels like most of the time. Components may change at any point in time, and this is entirely outside of your control. There are no guarantees that the changes will be compatible with your other components—incompatibility problems are very common, in fact.
+
+Besides components changing, software needs to deal with another constantly changing thing: data. In its most basic definition, software serves the processing of data. But data is not a static entity. We don't build data, freeze it, and say "yay, we're done!". Instead, data evolves with people, responds to changes, new information is accumulated while old information is thrown away. Data changes shape as needed, both for humans and computers.
+
+Yet, most mainstream languages treat data as a static, never-changing aspect of software. Any changes to data structures require significant re-engineering, which is particularly troublesome in systems that must stay up all the time—like web services.
+
+Languages also preclude the possibility of data having many shapes *at the same time*. Operations are required to choose a single shape and work with it, which makes distributed systems and upgrades a trickier business than it needs to be. Every engineer have to solve the problem of consistency between different versions of the application over and over again, for each new application.
+
+A big part of this problem is with our choice of technologies. Instead of pretending that the world is simple, sequential, static, and consistent, we *could* embrace its complexity, concurrent, dynamic, and inconsistent nature. We could build tools that support the natural evolution of data and computing systems.
+
+
