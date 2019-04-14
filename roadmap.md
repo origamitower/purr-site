@@ -2,6 +2,7 @@
 layout: page
 group: roadmap
 title: Roadmap
+permalink: /roadmap/
 ---
 
 # Roadmap
