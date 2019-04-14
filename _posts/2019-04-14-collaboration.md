@@ -1,31 +1,20 @@
 ---
-title: Why do we need collaboration in software?
+title: Collaboration in Software
 layout: article
 group: blog
 snip: >
-  A short introduction to Purr. Learn about its goals and the  it plans to achieve them.
+  The problems that come with using other people's code in your programs, and why you should care.
 ---
 
-For the past 5 years i've been thinking about, and experimenting with, ways in which programming could be better. Although I did not have a clear direction for most of that time, I believe I have a good idea of what "better" means to me now, and that's what this research blog will be about.
-
-
-<h2>Table of Contents</h2>
-
-  * TOC
-{:toc}
-
-
-## What is Purr?
-
-
-
-## Why do we need collaboration in software?
 
 Imagine that you're writing a big application for helping writers bring their creations to life. Of course, a big part of this application is an editor where writers will be able to type their drafts and edit the novel. But they also must be able to keep track of characters, locations, events, etc.
 
 You predict that your application will require many different screens, with buttons, images, text fields, etc. Most of what your application *needs* is not really related to the core value you're providing to your users. A text field isn't that much different in a writer application compared to any other application. If you had to write everything from scratch, you'd never ship anything. With that in mind, you add some GUI libraries to your project in order to focus on the important bits.
 
-### The problem of extending components
+  * TOC
+{:toc}
+
+## The problem of extending components
 
 Four months into development, things are going really well, and you have a working prototype of your project. But there's a problem: the rich text editor that you're using doesn't allow annotations to be attached to slices of text. One of the primary values your software should deliver is allowing writers to collaborate with others and quickly access reference information. For now you're putting this information in a side-bar, but users are getting confused by it—it's not a very good user experience.
 
@@ -49,7 +38,7 @@ We can't really assume that components will always be designed for extensibility
 So we need a system that allows extensibility *despite* people not designing for it, or coordinating their changes with all consumers. 
 
 
-### The problem of combining components
+## The problem of combining components
 
 Let's say you're lucky in this case that the library designers defined extension points that work for your use case. You extend their rich text editor component and continue on with your life. Now you're at a point where your beta users are finding a lot of errors that should've been fixed in each new version. That's making your software seem unreliable, and your users are getting more frustrated by the day.
 
@@ -86,7 +75,7 @@ The obvious drawback is that this approach requires much more work: it's harder 
 None of the options is perfect. Today you just pick your tradeoff (well, generally your programming languages picks your tradeoff for you) and roll with it. We need a system that allows components to combined and adapted to any context, *regardless* of whether authors intended/predicted those uses or not. Again, we cannot expect authors to coordinate the development of each component.
 
 
-### The problem of trusting components
+## The problem of trusting components
 
 As the development progresses you're constantly dealing with a very important choice: should you implement a particular feature yourself, or should you to the project a library that provides such feature?
 
@@ -105,7 +94,7 @@ Finally we have known attacks like [Spectre](https://meltdownattack.com/) and [J
 So we need programming language and tools that are designed *for* these social problems. We should be able to define precise privacy policies, and check for leaks and violations. We should be able to restrict what particular pieces of code may do in order to mitigate potential attacks. Down to how these pieces of code *run* and how much space they can use, because Spectre has taught us that even without access to any powerful object (e.g.: access to the filesystem) a piece of code may still read arbitrary memory from the process.
 
 
-### The problem of evolving components
+## The problem of evolving components
 
 We've touched this a few times earlier, but one of the major problems in modern programming is "concurrent evolution". That is, we understand that pretty much any big project we work on will require using components that were written by other people. We may even think of these components as "building blocks", but that invites a comparison with the physical world that isn't very accurate.
 

@@ -21,7 +21,7 @@ group: home
         <ul class="rl-timeline">
           {% for post in site.posts reversed %}
             <li class="rl-timeline-point">
-              <div class="rl-timeline-date">{{ post.date | date_to_long_string }}</div>
+              <div class="rl-timeline-date">{{ post.date | date_to_long_string }} &bullet; {{ post.content | number_of_words }} words</div>
               <a href="{{ post.url }}">
                 <strong class="rl-timeline-title">{{ post.title }}</strong>
                 <span class="rl-timeline-excerpt">{{ post.snip }}</span>

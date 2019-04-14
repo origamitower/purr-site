@@ -1237,6 +1237,8 @@
   font-size: 0.8rem;  
   text-align: center;
   display: block;
+  color: #6C7A89;
+  margin-bottom: -0.25rem;
 }
 
 .rl-timeline .rl-timeline-title {
