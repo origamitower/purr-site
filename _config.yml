@@ -6,6 +6,10 @@ plugins:
   - jekyll-redirect-from
 
 navigation:
+  - text: Roadmap
+    url: /roadmap/
+    group: roadmap
+
   - text: Source Code
     url: https://github.com/origamitower/purr
     group: external
