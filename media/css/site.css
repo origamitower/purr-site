@@ -1282,3 +1282,114 @@
   border: 1px solid #ececea;
   padding: 10px;
 }
+
+.rl-roadmap-status {
+  margin: 1em auto;
+  text-align: left;
+  max-width: 500px;
+  font-family: Source Sans Pro, sans-serif;
+}
+
+.rl-roadmap-status .rl-roadmap-title {
+  text-transform: uppercase;
+  font-weight: bold;
+  color: #DB5A6B;
+  font-size: 0.8rem;
+  letter-spacing: 0.05rem;
+}
+
+.rl-roadmap-timeline-container {
+  position: relative;
+}
+
+.rl-roadmap-timeline-container .rl-roadmap-milestone-start,
+.rl-roadmap-timeline-container .rl-roadmap-milestone-end {
+  position: absolute;
+  top: 0px;
+  font-size: 0.8rem;
+  font-weight: bold;
+  color: #16A085;
+}
+
+.rl-roadmap-timeline-container .rl-roadmap-milestone-start {
+  left: 0px;
+}
+
+.rl-roadmap-timeline-container .rl-roadmap-milestone-end {
+  right: 0px;
+}
+
+.rl-roadmap-timeline-container .rl-roadmap-milestone-timeline {
+  width: 100%;
+  padding: 2rem;
+  position: relative;
+  z-index: 1;
+  list-style: none;
+  margin: 0;
+}
+
+.rl-roadmap-timeline-container:before {
+  content: " ";
+  display: block;
+  height: 2px;
+  width: 100%;
+  background: #16A085;
+  top: 2.5rem;
+  position: absolute;
+}
+
+.rl-roadmap-milestone-timeline .rl-roadmap-step {
+  position: relative;
+}
+
+.rl-roadmap-milestone-timeline .rl-roadmap-step:before {
+  content: " ";
+  display: block;
+  position: relative;
+  width: 1rem;
+  height: 1rem;
+  top: 0.1rem;
+  background: #f7f7f7;
+  border: 2px solid #16A085;
+  border-radius: 100%
+}
+
+.rl-roadmap-milestone-timeline .rl-roadmap-step-completed:before,
+.rl-roadmap-milestone-timeline .rl-roadmap-step-current:before {
+  background: #16A085;
+}
+
+.rl-roadmap-milestone-timeline .rl-roadmap-step-current:before {
+  border-color: #f7f7f7;
+}
+
+.rl-roadmap-milestone-timeline {
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: space-evenly;
+}
+
+.rl-roadmap-milestone-timeline .rl-roadmap-step-current:after {
+  content: " ";
+  display: block;
+  width: 1px;
+  height: 1rem;
+  background: #16A085;
+  position: relative;
+  left: 0.5rem;
+  top: 2px;
+}
+
+.rl-roadmap-milestone-timeline .rl-roadmap-step-current span {
+  position: absolute;
+  top: 2.5rem;
+  width: 100px;
+  display: block;
+  text-align: center;
+  left: -40px;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  color: #6C7A89;
+  font-weight: bold;
+  line-height: 1.4em;
+}

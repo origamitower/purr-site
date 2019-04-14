@@ -1,0 +1,21 @@
+{% assign current = site.data.roadmap.milestone | minus: 1 %}
+{% assign milestone = site.data.roadmap.milestones[current] %}
+
+<div class="rl-roadmap-status">
+  <a href="/roadmap" class="rl-roadmap-title">Status: {{ milestone.title }}</a>
+  <div class="rl-roadmap-timeline-container">
+    <div class="rl-roadmap-milestone-start">{{ milestone.start }}</div>
+    <ul class="rl-roadmap-milestone-timeline">
+      {% for step in milestone.steps %}
+        {% if site.data.roadmap.step > forloop.index %}
+          <li class="rl-roadmap-step rl-roadmap-step-completed"></li>
+        {% elsif forloop.index == site.data.roadmap.step %}
+          <li class="rl-roadmap-step rl-roadmap-step-current"><span>{{ step }}</span></li>
+        {% else %}
+          <li class="rl-roadmap-step rl-roadmap-step-future"></li>
+        {% endif %}
+      {% endfor %}
+    </ul>
+    <div class="rl-roadmap-milestone-end">{{ milestone.end }}</div>
+  </div>
+</div>
