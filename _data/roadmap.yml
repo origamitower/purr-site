@@ -1,0 +1,68 @@
+milestone: 1
+step: 1
+
+milestones:
+  - title: A Tool to Teach Programming
+    start: Apr 2019
+    end: Dec 2019
+    goal: |
+      The first iteration of Purr aims to support better ways of teaching
+      programming concepts, in the spirit of Bret Victor's <a href="http://worrydream.com/LearnableProgramming/">Learnable Programming</a>
+    steps:
+      - The Purr computational model
+      - A serialisation format for Purr's image
+      - An experimental interpreter for Purr
+      - Visualising programs with Lenses & Observers
+      - Controlling execution with time-travelling debuggers
+
+  - title: Live, Literate Programming
+    start: Jan 2020
+    end: Dec 2020
+    goal: |
+      The second iteration of Purr aims to support general purpose programming, with an emphasis on live (immediate) feedback, and rich literate programming. This extends the previous capabilities with ways of editing programs and navigating massive codebases.
+    steps:
+      - Formalise the concept of Projects
+      - Projectional editor on Abstract Syntax Graphs
+      - Full support for executable specifications
+      - Code navigation and search
+      - Literate documents embedding explorable explanations
+
+  - title: A Fast Purr
+    start: Jan 2021
+    end: Dec 2021
+    goal: |
+      The third iteration of Purr aims to give users a smoother editing experience, and ways to package their application for production.
+    steps:
+      - A JIT compiler for the IDE
+      - An AOT compiler for distribution
+      - Formalise application packaging & deployment
+
+  - title: Collaborative Programming
+    start: "?"
+    end: "?"
+    goal: |
+      The fourth iteration of Purr tackles the trickier aspects of collaborative programming, such as package management and version control. This includes discoverability in big ecossystems, trust with decentralised authorities and suspicious parties, and uncoordinated concurrent development.
+    steps:
+      - Package & Trust management
+      - A rich, extensible version control system
+      - Collaborative (live) editing support
+
+  - title: Computers as Active Agents
+    start: "?"
+    end: "?"
+    goal: |
+      The fifth iteration of Purr incorporates more of the recent research on program synthesis and analysis in order to make computers more helpful to programmers.
+    steps:
+      - Program synthesis from examples/sketches
+      - Optimisation coach & cost analysis
+      - Model checking from contracts
+
+  - title: Distributed Purr
+    start: "?"
+    end: "?"
+    goal: |
+      The sixth iteration of Purr extends the earlier features for distributed programming, which makes the support for *heterogeneous* distributed systems (those comprised of multiple technologies) better.
+    steps:
+      - Multi-language actors/services
+      - A new capability-secure communication protocol
+      - Actor mobility

@@ -6,6 +6,10 @@ plugins:
   - jekyll-redirect-from
 
 navigation:
+  - text: Roadmap
+    url: /roadmap/
+    group: roadmap
+
   - text: Source Code
     url: https://github.com/origamitower/purr
     group: external
@@ -13,3 +17,11 @@ navigation:
   - text: Twitter
     url: https://twitter.com/OrigamiTower
     group: external
+
+defaults:
+  - scope:
+      path: _posts
+      type: posts
+    values:
+      group: blog
+      permalink: /articles/:year/:month/:title/
