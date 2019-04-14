@@ -1348,8 +1348,8 @@
   content: " ";
   display: block;
   position: relative;
-  width: 1rem;
-  height: 1rem;
+  width: 16px;
+  height: 16px;
   top: 0.1rem;
   background: #f7f7f7;
   border: 2px solid #16A085;
@@ -1388,7 +1388,7 @@
   width: 100px;
   display: block;
   text-align: center;
-  left: -40px;
+  left: -43px;
   font-size: 0.8rem;
   text-transform: uppercase;
   color: #6C7A89;
